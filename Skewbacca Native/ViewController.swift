@@ -14,6 +14,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var valueTRY: NSTextField!
     @IBOutlet weak var valueBRX: NSTextField!
     @IBOutlet weak var valueBRY: NSTextField!
+    @IBOutlet weak var valueExposureSlider: NSSlider!
 
     let context = CIContext()
 
@@ -41,13 +42,25 @@ class ViewController: NSViewController {
         return pf!.outputImage
     }
 
+    func exposureFilter(_ input: CIImage, value: NSNumber) -> CIImage?
+    {
+        let pf = CIFilter(name:"CIExposureAdjust")
+
+        pf!.setValue(input, forKey: "inputImage")
+        pf!.setValue(value, forKey: "inputEV")
+
+        return pf!.outputImage
+    }
+
 
     @IBAction func onConvertClicked(_ sender: Any) {
 
         let cgImageFromView = sourceImageView.image?.cgImage(forProposedRect: nil, context: nil, hints: nil)
         let ciImage = CIImage(cgImage: cgImageFromView!)
-        let newImage = self.perspectiveFilter(ciImage)
-        let rep: NSCIImageRep = NSCIImageRep(ciImage: newImage!)
+        let unskewedImage = self.perspectiveFilter(ciImage)
+        let exposureSliderValue = NSNumber(value: valueExposureSlider!.doubleValue)
+        let exposureCorrectedImage = self.exposureFilter(unskewedImage!, value: exposureSliderValue)
+        let rep: NSCIImageRep = NSCIImageRep(ciImage: exposureCorrectedImage!)
         let nsImage: NSImage = NSImage(size: rep.size)
         nsImage.addRepresentation(rep)
         targetImageView.image = nsImage
