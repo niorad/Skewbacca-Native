@@ -1,7 +1,6 @@
 import Cocoa
 
 
-
 class StageController: NSViewController {
 
     @IBOutlet weak var handleTopLeft: NSButton!
@@ -34,7 +33,6 @@ class StageController: NSViewController {
             }
             return $0
         }
-
     }
 
     func handleToImageCoordinate(_ coord: CGPoint) -> CIVector {

@@ -14,7 +14,6 @@ class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
     override var representedObject: Any? {
@@ -30,8 +29,7 @@ class ViewController: NSViewController {
         }
     }
 
-    func perspectiveFilter(_ input: CIImage, _ coords: Coordinates) -> CIImage?
-    {
+    func perspectiveFilter(_ input: CIImage, _ coords: Coordinates) -> CIImage? {
         let pf = CIFilter(name:"CIPerspectiveCorrection")
 
         pf!.setValue(input, forKey: "inputImage")
@@ -43,29 +41,54 @@ class ViewController: NSViewController {
         return pf!.outputImage
     }
 
-    func exposureFilter(_ input: CIImage, value: NSNumber) -> CIImage?
-    {
+    func exposureFilter(_ input: CIImage, value: NSNumber) -> CIImage? {
         let pf = CIFilter(name:"CIExposureAdjust")
-
         pf!.setValue(input, forKey: "inputImage")
         pf!.setValue(value, forKey: "inputEV")
-
         return pf!.outputImage
     }
 
+    @IBAction func onSaveClick(_ sender: Any) {
+        let saveDialog = NSSavePanel()
+        saveDialog.title = "Save Lid"
+        saveDialog.showsResizeIndicator = true
+        saveDialog.canCreateDirectories = true
+        saveDialog.showsHiddenFiles = false
+        saveDialog.allowedFileTypes = ["jpg"]
+        if(saveDialog.runModal() == NSApplication.ModalResponse.OK) {
+            print("Modal done")
+            print(saveDialog.url!)
 
-    @IBAction func onConvertClicked(_ sender: Any) {
+            let img = convertImage()
+            let bitmap = NSBitmapImageRep(ciImage: img)
+            let data = bitmap.representation(using: .jpeg, properties: [:])
 
+
+            do {
+                try data?.write(to: saveDialog.url!)
+            } catch {
+                print("Saving faileth")
+            }
+
+        } else {
+            print("Cancelled")
+        }
+    }
+
+    func convertImage() -> CIImage {
         let cgImageFromView = stageViewController!.getImage().cgImage(forProposedRect: nil, context: nil, hints: nil)
         let ciImage = CIImage(cgImage: cgImageFromView!)
         let unskewedImage = self.perspectiveFilter(ciImage, stageViewController!.getImageCoordinates())
         let exposureSliderValue = NSNumber(value: valueExposureSlider!.doubleValue)
-        let exposureCorrectedImage = self.exposureFilter(unskewedImage!, value: exposureSliderValue)
-        let rep: NSCIImageRep = NSCIImageRep(ciImage: exposureCorrectedImage!)
+        return self.exposureFilter(unskewedImage!, value: exposureSliderValue)!
+    }
+    
+    @IBAction func onConvertClicked(_ sender: Any) {
+        let filteredImage = convertImage()
+        let rep: NSCIImageRep = NSCIImageRep(ciImage: filteredImage)
         let nsImage: NSImage = NSImage(size: rep.size)
         nsImage.addRepresentation(rep)
         targetImageView.image = nsImage
-
     }
 
 }
