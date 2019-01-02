@@ -14,29 +14,36 @@ class StageController: NSViewController {
         return window.mouseLocationOutsideOfEventStream
     }
 
-    @IBAction func onTopLeftClicked(_ sender: Any) {
-        print("yo")
-        print(handleTopLeft.frame)
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             self.keyDown(with: $0)
             print($0.keyCode)
             let kc = $0.keyCode
-            let mouse = self.view.convert(CGPoint(x:self.location.x,y:self.location.y), from: nil)
+            let mouse = self.view.convert(CGPoint(x:self.location.x, y:self.location.y), from: nil)
+
+            let imageWidth = self.imageStage.image!.size.width
+            let imageHeight = self.imageStage.image!.size.height
+
+            let viewWidth = self.view.frame.width
+            let viewHeight = self.view.frame.height
+
+            let percX = mouse.x / viewWidth
+            let percY = mouse.y / viewHeight
+
+            let pointOnImageX = imageWidth * percX
+            let pointOnImageY = imageHeight * percY
+
+            print(pointOnImageX)
+            print(pointOnImageY)
 
             if(kc == 18) {
-                print("TOPLEFT")
                 self.handleTopLeft.frame.origin = mouse
             } else if(kc == 19) {
-                print("TOPRIGHT")
                 self.handleTopRight.frame.origin = mouse
             } else if(kc == 20) {
-                print("BOTTOMLEFT")
                 self.handleBottomLeft.frame.origin = mouse
             } else if(kc == 21) {
-                print("BOTTOMRIGHT")
                 self.handleBottomRight.frame.origin = mouse
             }
             return $0
@@ -46,6 +53,9 @@ class StageController: NSViewController {
 
     func getImage() -> NSImage {
         return imageStage.image!
+    }
+
+    func getImageCoordinates() {
     }
 
     
