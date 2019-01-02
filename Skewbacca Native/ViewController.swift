@@ -3,7 +3,6 @@ import Cocoa
 class ViewController: NSViewController {
 
 
-    @IBOutlet weak var sourceImageView: NSImageView!
     @IBOutlet weak var targetImageView: NSImageView!
 
     @IBOutlet weak var valueTLX: NSTextField!
@@ -16,6 +15,9 @@ class ViewController: NSViewController {
     @IBOutlet weak var valueBRY: NSTextField!
     @IBOutlet weak var valueExposureSlider: NSSlider!
 
+    var stageViewController: StageController?
+    let stageSegueIdentifier = "stageSegue"
+
     let context = CIContext()
 
 
@@ -26,6 +28,14 @@ class ViewController: NSViewController {
 
     override var representedObject: Any? {
         didSet {
+        }
+    }
+
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if segue.identifier == stageSegueIdentifier {
+            if let connectStageViewController = segue.destinationController as? StageController {
+                stageViewController = connectStageViewController
+            }
         }
     }
 
@@ -55,7 +65,7 @@ class ViewController: NSViewController {
 
     @IBAction func onConvertClicked(_ sender: Any) {
 
-        let cgImageFromView = sourceImageView.image?.cgImage(forProposedRect: nil, context: nil, hints: nil)
+        let cgImageFromView = stageViewController!.getImage().cgImage(forProposedRect: nil, context: nil, hints: nil)
         let ciImage = CIImage(cgImage: cgImageFromView!)
         let unskewedImage = self.perspectiveFilter(ciImage)
         let exposureSliderValue = NSNumber(value: valueExposureSlider!.doubleValue)
