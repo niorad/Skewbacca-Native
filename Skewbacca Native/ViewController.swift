@@ -4,15 +4,6 @@ class ViewController: NSViewController {
 
 
     @IBOutlet weak var targetImageView: NSImageView!
-
-    @IBOutlet weak var valueTLX: NSTextField!
-    @IBOutlet weak var valueTLY: NSTextField!
-    @IBOutlet weak var valueBLX: NSTextField!
-    @IBOutlet weak var valueBLY: NSTextField!
-    @IBOutlet weak var valueTRX: NSTextField!
-    @IBOutlet weak var valueTRY: NSTextField!
-    @IBOutlet weak var valueBRX: NSTextField!
-    @IBOutlet weak var valueBRY: NSTextField!
     @IBOutlet weak var valueExposureSlider: NSSlider!
 
     var stageViewController: StageController?
@@ -39,15 +30,15 @@ class ViewController: NSViewController {
         }
     }
 
-    func perspectiveFilter(_ input: CIImage) -> CIImage?
+    func perspectiveFilter(_ input: CIImage, _ coords: Coordinates) -> CIImage?
     {
         let pf = CIFilter(name:"CIPerspectiveCorrection")
 
         pf!.setValue(input, forKey: "inputImage")
-        pf!.setValue(CIVector(x: CGFloat(valueTLX!.integerValue), y: CGFloat(valueTLY!.integerValue)), forKey: "inputTopLeft")
-        pf!.setValue(CIVector(x: CGFloat(valueTRX!.integerValue), y: CGFloat(valueTRY!.integerValue)), forKey: "inputTopRight")
-        pf!.setValue(CIVector(x: CGFloat(valueBLX!.integerValue), y: CGFloat(valueBLY!.integerValue)), forKey: "inputBottomLeft")
-        pf!.setValue(CIVector(x: CGFloat(valueBRX!.integerValue), y: CGFloat(valueBRY!.integerValue)), forKey: "inputBottomRight")
+        pf!.setValue(coords.TL, forKey: "inputTopLeft")
+        pf!.setValue(coords.TR, forKey: "inputTopRight")
+        pf!.setValue(coords.BL, forKey: "inputBottomLeft")
+        pf!.setValue(coords.BR, forKey: "inputBottomRight")
 
         return pf!.outputImage
     }
@@ -67,7 +58,7 @@ class ViewController: NSViewController {
 
         let cgImageFromView = stageViewController!.getImage().cgImage(forProposedRect: nil, context: nil, hints: nil)
         let ciImage = CIImage(cgImage: cgImageFromView!)
-        let unskewedImage = self.perspectiveFilter(ciImage)
+        let unskewedImage = self.perspectiveFilter(ciImage, stageViewController!.getImageCoordinates())
         let exposureSliderValue = NSNumber(value: valueExposureSlider!.doubleValue)
         let exposureCorrectedImage = self.exposureFilter(unskewedImage!, value: exposureSliderValue)
         let rep: NSCIImageRep = NSCIImageRep(ciImage: exposureCorrectedImage!)
