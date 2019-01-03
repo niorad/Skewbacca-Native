@@ -718,6 +718,9 @@
                                 <rect key="frame" x="712" y="32" width="180" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <sliderCell key="cell" state="on" alignment="left" minValue="-2" maxValue="2" tickMarkPosition="above" numberOfTickMarks="21" allowsTickMarkValuesOnly="YES" sliderType="linear" id="Qi2-GW-nId"/>
+                                <connections>
+                                    <action selector="onExposureChanged:" target="XfG-lQ-9wD" id="dtI-eE-Mcg"/>
+                                </connections>
                             </slider>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wzy-pk-eff">
                                 <rect key="frame" x="667" y="34" width="41" height="17"/>
@@ -862,6 +865,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="lid" width="3968" height="2976"/>
+        <image name="lid" width="2976" height="3968"/>
     </resources>
 </document>

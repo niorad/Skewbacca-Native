@@ -14,6 +14,8 @@ class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(refreshPreviewImage), name: Notification.Name("SelectionChanged"), object: nil)
     }
 
     override var representedObject: Any? {
@@ -95,7 +97,14 @@ class ViewController: NSViewController {
         return self.exposureFilter(unskewedImage!, value: exposureSliderValue)!
     }
     
+    @IBAction func onExposureChanged(_ sender: Any) {
+        self.refreshPreviewImage()
+    }
     @IBAction func onConvertClicked(_ sender: Any) {
+        self.refreshPreviewImage()
+    }
+
+    @objc func refreshPreviewImage() {
         let filteredImage = convertImage()
         let rep: NSCIImageRep = NSCIImageRep(ciImage: filteredImage)
         let nsImage: NSImage = NSImage(size: rep.size)

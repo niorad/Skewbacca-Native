@@ -15,10 +15,14 @@ class StageController: NSViewController {
         return window.mouseLocationOutsideOfEventStream
     }
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let nc = NotificationCenter.default
+
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
-            self.keyDown(with: $0)
+
             let kc = $0.keyCode
             let mouse = self.view.convert(CGPoint(x:self.location.x, y:self.location.y), from: nil)
 
@@ -30,9 +34,14 @@ class StageController: NSViewController {
                 self.handleBottomLeft.frame.origin = mouse
             } else if(kc == 21) {
                 self.handleBottomRight.frame.origin = mouse
+            } else {
+                self.keyDown(with: $0)
             }
-            return $0
+            nc.post(name: Notification.Name("SelectionChanged"), object: nil)
+            return nil
         }
+
+
     }
 
     func handleToImageCoordinate(_ coord: CGPoint) -> CIVector {
