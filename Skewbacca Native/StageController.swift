@@ -63,6 +63,11 @@ class StageController: NSViewController {
         return imageStage.image!
     }
 
+    func setImage(_ url: URL) {
+        let newImage = NSImage(byReferencing: url)
+        self.imageStage.image = newImage
+    }
+
     func getImageCoordinates() -> Coordinates {
         return Coordinates(
             TL: handleToImageCoordinate(self.handleTopLeft.frame.origin),

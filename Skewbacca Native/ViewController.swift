@@ -48,6 +48,18 @@ class ViewController: NSViewController {
         return pf!.outputImage
     }
 
+    @IBAction func onOpenClick(_ sender: Any) {
+        let openDialog = NSOpenPanel()
+        openDialog.title = "Open Image"
+        openDialog.showsResizeIndicator = true
+        if(openDialog.runModal() == NSApplication.ModalResponse.OK) {
+            print(openDialog.url!)
+            stageViewController!.setImage(openDialog.url!)
+        } else {
+            print("Opening Aborted")
+        }
+    }
+
     @IBAction func onSaveClick(_ sender: Any) {
         let saveDialog = NSSavePanel()
         saveDialog.title = "Save Lid"
