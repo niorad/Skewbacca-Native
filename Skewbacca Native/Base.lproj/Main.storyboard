@@ -181,11 +181,11 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Skewbacca" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="Skewbacca" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="1000" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <value key="minSize" type="size" width="300" height="300"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
                         </connections>
@@ -291,6 +291,7 @@
                             <constraint firstItem="BJy-bm-GOq" firstAttribute="top" secondItem="YXG-Ej-b9u" secondAttribute="top" id="U2L-ES-X3a"/>
                             <constraint firstAttribute="bottom" secondItem="VZ8-QA-utI" secondAttribute="bottom" constant="20" id="ZOL-X5-wXc"/>
                             <constraint firstItem="VZ8-QA-utI" firstAttribute="top" secondItem="BJy-bm-GOq" secondAttribute="bottom" constant="24" id="ZSi-tM-rwR"/>
+                            <constraint firstItem="YXG-Ej-b9u" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="gYD-2K-gja"/>
                             <constraint firstItem="BJy-bm-GOq" firstAttribute="leading" secondItem="YXG-Ej-b9u" secondAttribute="trailing" constant="40" id="i9H-nm-f89"/>
                         </constraints>
                     </view>
@@ -301,7 +302,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-200" y="1222.5"/>
+            <point key="canvasLocation" x="-289" y="1223"/>
         </scene>
         <!--Stage Controller-->
         <scene sceneID="XRh-BV-fIq">
@@ -365,7 +366,7 @@
                 </viewController>
                 <customObject id="quy-y4-7gD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-200" y="2050"/>
+            <point key="canvasLocation" x="-689" y="1979"/>
         </scene>
     </scenes>
     <resources>
