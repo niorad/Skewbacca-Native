@@ -203,56 +203,96 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Skewbacca_Native" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="1400" height="640"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1400" height="631"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BJy-bm-GOq">
-                                <rect key="frame" x="667" y="100" width="716" height="523"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BJy-bm-GOq">
+                                <rect key="frame" x="648" y="91" width="735" height="523"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="729" id="LFT-Rt-Ui5"/>
+                                </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="qQW-lC-bru"/>
                             </imageView>
-                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJa-Yv-192">
-                                <rect key="frame" x="712" y="32" width="180" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <sliderCell key="cell" state="on" alignment="left" minValue="-2" maxValue="2" tickMarkPosition="above" numberOfTickMarks="21" allowsTickMarkValuesOnly="YES" sliderType="linear" id="Qi2-GW-nId"/>
-                                <connections>
-                                    <action selector="onExposureChanged:" target="XfG-lQ-9wD" id="dtI-eE-Mcg"/>
-                                </connections>
-                            </slider>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wzy-pk-eff">
-                                <rect key="frame" x="667" y="34" width="41" height="17"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="-2.0" id="wqE-gG-d4L">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t86-8g-zY7">
-                                <rect key="frame" x="896" y="34" width="36" height="17"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="2.0" id="uuY-6e-UoS">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <containerView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YXG-Ej-b9u">
-                                <rect key="frame" x="20" y="20" width="600" height="600"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="YXG-Ej-b9u">
+                                <rect key="frame" x="20" y="20" width="591" height="591"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="YXG-Ej-b9u" secondAttribute="height" multiplier="1:1" id="jz0-0D-nnt"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="d6m-SR-1ZO" kind="embed" identifier="stageSegue" id="p0w-3Z-Uhy"/>
                                 </connections>
                             </containerView>
-                            <box fixedFrame="YES" title="Exposure" translatesAutoresizingMaskIntoConstraints="NO" id="VZ8-QA-utI">
-                                <rect key="frame" x="667" y="16" width="266" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <box title="Exposure" translatesAutoresizingMaskIntoConstraints="NO" id="VZ8-QA-utI">
+                                <rect key="frame" x="648" y="16" width="230" height="54"/>
                                 <view key="contentView" id="DcN-B8-l6t">
-                                    <rect key="frame" x="3" y="3" width="260" height="46"/>
+                                    <rect key="frame" x="3" y="3" width="224" height="36"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l59-S1-rIm">
+                                            <rect key="frame" x="10" y="10" width="204" height="16"/>
+                                            <subviews>
+                                                <textField translatesAutoresizingMaskIntoConstraints="NO" id="wzy-pk-eff">
+                                                    <rect key="frame" x="-2" y="1" width="26" height="14"/>
+                                                    <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" alignment="right" title="-2.0" id="wqE-gG-d4L">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <slider horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="SJa-Yv-192">
+                                                    <rect key="frame" x="28" y="-2" width="153" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="149" id="8eB-jH-t4P"/>
+                                                    </constraints>
+                                                    <sliderCell key="cell" state="on" alignment="left" minValue="-2" maxValue="2" tickMarkPosition="above" numberOfTickMarks="21" allowsTickMarkValuesOnly="YES" sliderType="linear" id="Qi2-GW-nId"/>
+                                                    <connections>
+                                                        <action selector="onExposureChanged:" target="XfG-lQ-9wD" id="dtI-eE-Mcg"/>
+                                                    </connections>
+                                                </slider>
+                                                <textField translatesAutoresizingMaskIntoConstraints="NO" id="t86-8g-zY7">
+                                                    <rect key="frame" x="185" y="1" width="21" height="14"/>
+                                                    <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" alignment="left" title="2.0" id="uuY-6e-UoS">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </subviews>
+                                            <visibilityPriorities>
+                                                <real value="1000"/>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                            </visibilityPriorities>
+                                            <customSpacing>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                            </customSpacing>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="l59-S1-rIm" firstAttribute="leading" secondItem="DcN-B8-l6t" secondAttribute="leading" constant="10" id="Eug-7v-hD0"/>
+                                        <constraint firstAttribute="trailing" secondItem="l59-S1-rIm" secondAttribute="trailing" constant="10" id="V05-Tz-3VJ"/>
+                                        <constraint firstItem="l59-S1-rIm" firstAttribute="top" secondItem="DcN-B8-l6t" secondAttribute="top" constant="10" id="gi9-NZ-PPn"/>
+                                        <constraint firstAttribute="bottom" secondItem="l59-S1-rIm" secondAttribute="bottom" constant="10" id="jKs-xl-2qn"/>
+                                    </constraints>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="5qJ-4l-RWi"/>
+                                </constraints>
                             </box>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="BJy-bm-GOq" secondAttribute="trailing" constant="20" symbolic="YES" id="78r-6i-zWP"/>
+                            <constraint firstItem="BJy-bm-GOq" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="9LP-3A-aHK"/>
+                            <constraint firstItem="YXG-Ej-b9u" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="N0I-Xl-Hgc"/>
+                            <constraint firstAttribute="bottom" secondItem="YXG-Ej-b9u" secondAttribute="bottom" constant="20" symbolic="YES" id="Q9U-K7-VT7"/>
+                            <constraint firstItem="BJy-bm-GOq" firstAttribute="leading" secondItem="VZ8-QA-utI" secondAttribute="leading" id="Slv-kd-ODV"/>
+                            <constraint firstItem="BJy-bm-GOq" firstAttribute="top" secondItem="YXG-Ej-b9u" secondAttribute="top" id="U2L-ES-X3a"/>
+                            <constraint firstAttribute="bottom" secondItem="VZ8-QA-utI" secondAttribute="bottom" constant="20" id="ZOL-X5-wXc"/>
+                            <constraint firstItem="VZ8-QA-utI" firstAttribute="top" secondItem="BJy-bm-GOq" secondAttribute="bottom" constant="24" id="ZSi-tM-rwR"/>
+                            <constraint firstItem="BJy-bm-GOq" firstAttribute="leading" secondItem="YXG-Ej-b9u" secondAttribute="trailing" constant="40" id="i9H-nm-f89"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="targetImageView" destination="BJy-bm-GOq" id="99Z-LB-Uru"/>
@@ -261,7 +301,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-200" y="1223"/>
+            <point key="canvasLocation" x="-200" y="1222.5"/>
         </scene>
         <!--Stage Controller-->
         <scene sceneID="XRh-BV-fIq">
