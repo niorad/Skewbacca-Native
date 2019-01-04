@@ -23,6 +23,46 @@ class ViewController: NSViewController {
         }
     }
 
+    @IBAction func onOpenMenuItemSelected(_ sender: Any) {
+        let openDialog = NSOpenPanel()
+        openDialog.title = "Open Image"
+        openDialog.showsResizeIndicator = true
+        if(openDialog.runModal() == NSApplication.ModalResponse.OK) {
+            print(openDialog.url!)
+            stageViewController!.setImage(openDialog.url!)
+        } else {
+            print("Opening Aborted")
+        }
+    }
+
+    @IBAction func onExportMenuItemSelected(_ sender: Any) {
+        let saveDialog = NSSavePanel()
+        saveDialog.title = "Save Lid"
+        saveDialog.showsResizeIndicator = true
+        saveDialog.canCreateDirectories = true
+        saveDialog.showsHiddenFiles = false
+        saveDialog.allowedFileTypes = ["jpg"]
+        if(saveDialog.runModal() == NSApplication.ModalResponse.OK) {
+            print("Modal done")
+            print(saveDialog.url!)
+
+            let img = convertImage()
+            let bitmap = NSBitmapImageRep(ciImage: img)
+            let data = bitmap.representation(using: .jpeg, properties: [:])
+
+
+            do {
+                try data?.write(to: saveDialog.url!)
+            } catch {
+                print("Saving faileth")
+            }
+
+        } else {
+            print("Cancelled")
+        }
+    }
+
+
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == stageSegueIdentifier {
             if let connectStageViewController = segue.destinationController as? StageController {
@@ -50,45 +90,6 @@ class ViewController: NSViewController {
         return pf!.outputImage
     }
 
-    @IBAction func onOpenClick(_ sender: Any) {
-        let openDialog = NSOpenPanel()
-        openDialog.title = "Open Image"
-        openDialog.showsResizeIndicator = true
-        if(openDialog.runModal() == NSApplication.ModalResponse.OK) {
-            print(openDialog.url!)
-            stageViewController!.setImage(openDialog.url!)
-        } else {
-            print("Opening Aborted")
-        }
-    }
-
-    @IBAction func onSaveClick(_ sender: Any) {
-        let saveDialog = NSSavePanel()
-        saveDialog.title = "Save Lid"
-        saveDialog.showsResizeIndicator = true
-        saveDialog.canCreateDirectories = true
-        saveDialog.showsHiddenFiles = false
-        saveDialog.allowedFileTypes = ["jpg"]
-        if(saveDialog.runModal() == NSApplication.ModalResponse.OK) {
-            print("Modal done")
-            print(saveDialog.url!)
-
-            let img = convertImage()
-            let bitmap = NSBitmapImageRep(ciImage: img)
-            let data = bitmap.representation(using: .jpeg, properties: [:])
-
-
-            do {
-                try data?.write(to: saveDialog.url!)
-            } catch {
-                print("Saving faileth")
-            }
-
-        } else {
-            print("Cancelled")
-        }
-    }
-
     func convertImage() -> CIImage {
         let cgImageFromView = stageViewController!.getImage().cgImage(forProposedRect: nil, context: nil, hints: nil)
         let ciImage = CIImage(cgImage: cgImageFromView!)
@@ -98,9 +99,6 @@ class ViewController: NSViewController {
     }
     
     @IBAction func onExposureChanged(_ sender: Any) {
-        self.refreshPreviewImage()
-    }
-    @IBAction func onConvertClicked(_ sender: Any) {
         self.refreshPreviewImage()
     }
 
