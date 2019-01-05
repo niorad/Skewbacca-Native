@@ -316,38 +316,26 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="bottomLeft" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="lid" id="aXr-LE-fUk"/>
                             </imageView>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aqt-OD-4U3">
-                                <rect key="frame" x="123" y="469" width="25" height="25"/>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2eV-Eb-qlS" userLabel="Top Left">
+                                <rect key="frame" x="43" y="487" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" title="⬁" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="sP7-jt-1mS">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system" size="25"/>
-                                </buttonCell>
-                            </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4hA-zc-BcI">
-                                <rect key="frame" x="123" y="294" width="25" height="25"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="cross" id="hgp-Up-gYI"/>
+                            </imageView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kPM-KA-2m6" userLabel="Bottom Right">
+                                <rect key="frame" x="272" y="353" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" title="⬃" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="otk-Jj-ko9">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system" size="25"/>
-                                </buttonCell>
-                            </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HvO-P8-4CW">
-                                <rect key="frame" x="388" y="294" width="25" height="25"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="cross" id="VSw-S9-JG0"/>
+                            </imageView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="plh-DC-lwK" userLabel="Top Right">
+                                <rect key="frame" x="272" y="487" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" title="⬂" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="igB-dc-NiO">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system" size="25"/>
-                                </buttonCell>
-                            </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MgD-g0-9Ot">
-                                <rect key="frame" x="354" y="476" width="25" height="25"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="cross" id="oET-Zp-OHB"/>
+                            </imageView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zdu-xM-BYS" userLabel="Bottom Left">
+                                <rect key="frame" x="43" y="353" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" title="⬀" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="I9h-0D-8ck">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system" size="25"/>
-                                </buttonCell>
-                            </button>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="cross" id="Xzz-SO-23n"/>
+                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="pgi-YT-8vP" firstAttribute="leading" secondItem="G0k-Eb-Vl2" secondAttribute="leading" constant="3" id="NNU-9z-fxj"/>
@@ -357,19 +345,20 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="handleBottomLeft" destination="4hA-zc-BcI" id="deC-ho-2Pj"/>
-                        <outlet property="handleBottomRight" destination="HvO-P8-4CW" id="2Es-ER-dh5"/>
-                        <outlet property="handleTopLeft" destination="Aqt-OD-4U3" id="XkK-W1-eXB"/>
-                        <outlet property="handleTopRight" destination="MgD-g0-9Ot" id="8Hs-1r-EFg"/>
+                        <outlet property="bottomLeft" destination="zdu-xM-BYS" id="qbK-kC-f8m"/>
+                        <outlet property="bottomRight" destination="kPM-KA-2m6" id="Y0k-su-9bq"/>
                         <outlet property="imageStage" destination="pgi-YT-8vP" id="pOg-it-4hE"/>
+                        <outlet property="topLeft" destination="2eV-Eb-qlS" id="IsP-lZ-EMM"/>
+                        <outlet property="topRight" destination="plh-DC-lwK" id="bAj-JB-Bse"/>
                     </connections>
                 </viewController>
                 <customObject id="quy-y4-7gD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-689" y="1979"/>
+            <point key="canvasLocation" x="-404" y="2001"/>
         </scene>
     </scenes>
     <resources>
+        <image name="cross" width="49" height="50"/>
         <image name="lid" width="2976" height="3968"/>
     </resources>
 </document>

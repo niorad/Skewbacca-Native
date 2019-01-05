@@ -6,3 +6,7 @@ struct Coordinates {
     var BL: CIVector;
     var BR: CIVector;
 }
+
+enum Directions {
+    case TL, TR, BL, BR
+}

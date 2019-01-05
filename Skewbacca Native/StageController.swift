@@ -3,12 +3,19 @@ import Cocoa
 
 class StageController: NSViewController {
 
-    @IBOutlet weak var handleTopLeft: NSButton!
-    @IBOutlet weak var handleTopRight: NSButton!
-    @IBOutlet weak var handleBottomLeft: NSButton!
-    @IBOutlet weak var handleBottomRight: NSButton!
+    @IBOutlet var topLeft: NSImageView!
+    @IBOutlet var bottomRight: NSImageView!
+    @IBOutlet var bottomLeft: NSImageView!
+    @IBOutlet var topRight: NSImageView!
 
     @IBOutlet weak var imageStage: NSImageView!
+
+    var coordinates = Coordinates(
+        TL: CIVector(x: 0, y: 0),
+        TR: CIVector(x: 0, y: 0),
+        BL: CIVector(x: 0, y: 0),
+        BR: CIVector(x: 0, y: 0)
+    )
 
     lazy var window: NSWindow = self.view.window!
     var location: NSPoint {
@@ -27,13 +34,25 @@ class StageController: NSViewController {
             let mouse = self.view.convert(CGPoint(x:self.location.x, y:self.location.y), from: nil)
 
             if(kc == 18) {
-                self.handleTopLeft.frame.origin = mouse
+                let handleSize = self.topLeft.frame.width
+                let handleOffset = handleSize / -2
+                self.updateImageCoordinatesAt(.TL, x: mouse.x, y: mouse.y)
+                self.topLeft.frame.origin = CGPoint(x: mouse.x + handleOffset, y: mouse.y + handleOffset)
             } else if(kc == 19) {
-                self.handleTopRight.frame.origin = mouse
+                let handleSize = self.topRight.frame.width
+                let handleOffset = handleSize / -2
+                self.updateImageCoordinatesAt(.TR, x: mouse.x, y: mouse.y)
+                self.topRight.frame.origin = CGPoint(x: mouse.x + handleOffset, y: mouse.y + handleOffset)
             } else if(kc == 20) {
-                self.handleBottomLeft.frame.origin = mouse
+                let handleSize = self.bottomLeft.frame.width
+                let handleOffset = handleSize / -2
+                self.updateImageCoordinatesAt(.BL, x: mouse.x, y: mouse.y)
+                self.bottomLeft.frame.origin = CGPoint(x: mouse.x + handleOffset, y: mouse.y + handleOffset)
             } else if(kc == 21) {
-                self.handleBottomRight.frame.origin = mouse
+                let handleSize = self.bottomRight.frame.width
+                let handleOffset = handleSize / -2
+                self.updateImageCoordinatesAt(.BR, x: mouse.x, y: mouse.y)
+                self.bottomRight.frame.origin = CGPoint(x: mouse.x + handleOffset, y: mouse.y + handleOffset)
             } else {
                 self.keyDown(with: $0)
             }
@@ -77,13 +96,37 @@ class StageController: NSViewController {
         self.imageStage.image = newImage
     }
 
+    func updateHandlePositions() {
+        topLeft.frame.origin = CGPoint(x: coordinates.TL.x, y: coordinates.TL.y)
+        topRight.frame.origin = CGPoint(x: coordinates.TR.x, y: coordinates.TR.y)
+        bottomLeft.frame.origin = CGPoint(x: coordinates.BL.x, y: coordinates.BL.y)
+        bottomRight.frame.origin = CGPoint(x: coordinates.BR.x, y: coordinates.BR.y)
+    }
+
+    func updateImageCoordinatesAt(_ direction: Directions, x: CGFloat, y: CGFloat) {
+
+        switch direction {
+        case .TL:
+            self.coordinates.TL = self.handleToImageCoordinate(CGPoint(x: x, y: y))
+        case .TR:
+            self.coordinates.TR = self.handleToImageCoordinate(CGPoint(x: x, y: y))
+        case .BL:
+            self.coordinates.BL = self.handleToImageCoordinate(CGPoint(x: x, y: y))
+        case .BR:
+            self.coordinates.BR = self.handleToImageCoordinate(CGPoint(x: x, y: y))
+        }
+
+//        self.coordinates = Coordinates(
+//            TL: handleToImageCoordinate(self.topLeft.frame.origin),
+//            TR: handleToImageCoordinate(self.topRight.frame.origin),
+//            BL: handleToImageCoordinate(self.bottomLeft.frame.origin),
+//            BR: handleToImageCoordinate(self.bottomRight.frame.origin)
+//        )
+    }
+
+
     func getImageCoordinates() -> Coordinates {
-        return Coordinates(
-            TL: handleToImageCoordinate(self.handleTopLeft.frame.origin),
-            TR: handleToImageCoordinate(self.handleTopRight.frame.origin),
-            BL: handleToImageCoordinate(self.handleBottomLeft.frame.origin),
-            BR: handleToImageCoordinate(self.handleBottomRight.frame.origin)
-        )
+        return self.coordinates
     }
 
     
