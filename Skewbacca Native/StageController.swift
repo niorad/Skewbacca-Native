@@ -1,6 +1,5 @@
 import Cocoa
 
-
 class StageController: NSViewController {
 
     @IBOutlet var topLeft: NSImageView!

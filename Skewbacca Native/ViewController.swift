@@ -23,6 +23,10 @@ class ViewController: NSViewController {
         }
     }
 
+    func onFileDraggedOnDock(_ path: String) {
+        stageViewController!.setImage(URL(fileURLWithPath: path))
+    }
+
     @IBAction func onOpenMenuItemSelected(_ sender: Any) {
         let openDialog = NSOpenPanel()
         openDialog.title = "Open Image"
